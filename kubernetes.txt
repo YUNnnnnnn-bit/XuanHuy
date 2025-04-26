@@ -1,0 +1,38 @@
+Dưới đây là danh sách các câu lệnh Kubernetes (kubectl) cơ bản và thường dùng nhất, chia theo từng nhóm chức năng:
+
+1. Quản lý cluster & context
+kubectl config view                          # Xem cấu hình kubectl hiện tại
+kubectl config use-context <tên-context>     # Chuyển sang context khác
+kubectl config get-contexts                  # Liệt kê các context hiện có
+kubectl config current-context               # Xem context hiện tại
+
+2. Làm việc với pod
+kubectl get pods                             # Liệt kê tất cả pods
+kubectl get pods -n <namespace>              # Liệt kê pods trong namespace
+kubectl describe pod <tên-pod>               # Xem chi tiết pod
+kubectl logs <tên-pod>                       # Xem log của pod
+kubectl exec -it <tên-pod> -- /bin/bash      # SSH vào container
+kubectl delete pod <tên-pod>                 # Xoá pod
+
+3. Làm việc với deployments
+kubectl get deployments                      # Liệt kê các deployments
+kubectl create deployment <tên> --image=<ảnh>  # Tạo một deployment
+kubectl scale deployment <tên> --replicas=3  # Thay đổi số lượng pod
+kubectl rollout restart deployment <tên>     # Khởi động lại deployment
+kubectl delete deployment <tên>              # Xoá deployment
+
+4. Làm việc với services
+kubectl get svc                              # Liệt kê các service
+kubectl expose deployment <tên> --port=80 --target-port=8080 --type=NodePort
+                                             # Expose một deployment thành service
+kubectl delete svc <tên-service>             # Xoá service
+
+5. Apply YAML config
+kubectl apply -f <file.yaml>                 # Tạo hoặc cập nhật tài nguyên từ file YAML
+kubectl delete -f <file.yaml>                # Xoá tài nguyên từ file YAML
+
+6. Một số lệnh hữu ích khác
+kubectl get all                              # Liệt kê tất cả tài nguyên (pods, svc, etc)
+kubectl get nodes                            # Xem các node trong cluster
+kubectl top pod                              # Xem resource usage của các pod (cần metrics-server)
+kubectl top node                             # Xem resource usage của các node
